@@ -8,12 +8,11 @@ struct user
 };
 
 void accept(struct user[], int);
-int input(struct user[],int);
 void display(struct user[], int);
 int search(struct user[], int, int);
 void deposit(struct user[], int, int, int);
 void withdraw(struct user[], int, int, int);
-int del (struct user[],int, int);
+void del (struct user[],int, int);
 
 int main()
 {
@@ -33,7 +32,6 @@ int main()
         printf("Press 3 to deposit amount.\n");
         printf("Press 4 to withdraw amount.\n");
         printf("Press 5 to delete an account.\n");
-        printf("Press 6 to add an account.\n");
         printf("Press 0 to exit\n");
         printf("\nEnter choice(0-5) : ");
         scanf("%d", &choice);
@@ -70,32 +68,15 @@ int main()
                 printf("Enter amount to withdraw : ");
                 scanf("%d", &amount);
                 withdraw(data, n, account_no, amount);
-                break;
             case 5:
                 printf("Enter account number : ");
                 scanf("%d", &account_no);
                 del(data,n,account_no);
-                break;
-            case 6:
-                input(data,n);
-                n=n+1;
-                break;
         }
     }
     while (choice != 0);
 
     return 0;
-}
-int input(struct user list[80],int s)
-{
-    printf("\nEnter account_no : ");
-        scanf("%d", &list[s+1].account_no);
-        fflush(stdin);
-        printf("Enter name : ");
-        gets(list[s+1].name);
-        list[s+1].balance = 0;
-        return s=s+1;
-
 }
 
 void accept(struct user list[80], int s)
@@ -170,19 +151,24 @@ void withdraw(struct user list[], int s, int number, int amt)
     }
 }
 
-int del(struct user list[],int s, int number)
+void del(struct user list[],int s, int number)
 {
     int i = search(list,s,number);
     if(i == -1)
     {
         printf("Record not found\n");
-
     }
     else
     {
          printf("Account %d is deleted. The total amount of %d dollar withdraw.\n",list[i].account_no, list[i].balance);
         int j;
         for(i=j;j<19;j++)
+        {
+            list[j+1]=list[j+2];
+        }
+}
+}
+
         {
             list[j+1]=list[j+2];
             return s=s-1;
