@@ -168,13 +168,3 @@ void del(struct user list[],int s, int number)
         }
 }
 }
-
-        {
-            list[j+1]=list[j+2];
-            return s=s-1;
-        }
-
-
-}
-return s;
-}
